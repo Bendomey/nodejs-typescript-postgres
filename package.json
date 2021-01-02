@@ -36,8 +36,8 @@
       "start": "node build/index.js",
       "dev": "NODE_ENV=development nodemon --exec ts-node src/index.ts",
       "build": "tsc",
-      "test": "jest --watch",
-      "test-and-exit": "jest --detectOpenHandles --force-exit"
+      "test": "NODE_ENV=development jest --watch",
+      "test-and-exit": "NODE_ENV=development jest --detectOpenHandles --force-exit"
    },
    "bugs": {
       "url": "https://github.com/Bendomey/nodejs-typescript-postgres/issues"
