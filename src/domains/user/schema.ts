@@ -3,9 +3,11 @@ import { gql } from "apollo-server-express";
 export default gql`
   type User {
     id: Int!
-    firstName: String!
-    lastName: String!
+    firstName: String
+    lastName: String
     age: Int!
+    createdAt: Date!
+    updatedAt: Date!
   }
 
   input getUserFilter {
@@ -36,7 +38,7 @@ export default gql`
 
   extend type Mutation {
     createUser(input: createUserInput!): User!
-    updateUser(input: updateUserInput): User!
+    updateUser(input: updateUserInput): Boolean!
     deleteUser(input: deleteUserInput!): Boolean!
   }
 `;
