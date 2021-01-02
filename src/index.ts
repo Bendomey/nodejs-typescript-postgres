@@ -1,48 +1,28 @@
 import "reflect-metadata";
-import {createConnection} from "typeorm";
-import * as express from "express";
-import * as bodyParser from "body-parser";
-import {Request, Response} from "express";
-import {Routes} from "./routes";
-import {User} from "./entity/User";
+import "dotenv/config";
+import { RestServer, GraphqlServer } from "./interfaces";
+import { DatabseConnectivity } from "./infrastructure";
 
-createConnection().then(async connection => {
+let PORT: string = process.env.PORT || "5000";
+let appName: string = process.env.APP_NAME || "Node starter";
 
-    // create express app
-    const app = express();
-    app.use(bodyParser.json());
+(async () => {
+  // make a connection to the db
+  await DatabseConnectivity(process.env.NODE_ENV);
 
-    // register express routes from defined application routes
-    Routes.forEach(route => {
-        (app as any)[route.method](route.route, (req: Request, res: Response, next: Function) => {
-            const result = (new (route.controller as any))[route.action](req, res, next);
-            if (result instanceof Promise) {
-                result.then(result => result !== null && result !== undefined ? res.send(result) : undefined);
+  //connect to grapqhl server
+  const graphqlServer = GraphqlServer();
+  graphqlServer.applyMiddleware({
+    app: RestServer,
+    path: "/graphql",
+    cors: false,
+  });
 
-            } else if (result !== null && result !== undefined) {
-                res.json(result);
-            }
-        });
-    });
-
-    // setup express app here
-    // ...
-
-    // start express server
-    app.listen(3000);
-
-    // insert new users for test
-    await connection.manager.save(connection.manager.create(User, {
-        firstName: "Timber",
-        lastName: "Saw",
-        age: 27
-    }));
-    await connection.manager.save(connection.manager.create(User, {
-        firstName: "Phantom",
-        lastName: "Assassin",
-        age: 24
-    }));
-
-    console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results");
-
-}).catch(error => console.log(error));
+  // start express server
+  RestServer.listen(PORT, async () => {
+    console.log(`${appName} Server started on http://localhost:${PORT}`);
+    console.log(
+      `${appName} Graphql served on http://localhost:${PORT}/graphql`
+    );
+  });
+})();
