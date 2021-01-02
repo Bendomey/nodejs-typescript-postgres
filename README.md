@@ -1,4 +1,4 @@
-# Awesome Project Build with TypeORM
+# nodejs-typescript-postgres Built with TypeORM
 
 Steps to run this project:
 

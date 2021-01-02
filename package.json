@@ -1,20 +1,59 @@
 {
    "name": "nodejs-typescript-postgres",
    "version": "0.0.1",
-   "description": "Awesome project developed with TypeORM.",
+   "description": "Nodejs boilerplate code with postgres and typescript",
    "devDependencies": {
       "ts-node": "3.3.0",
       "@types/node": "^8.0.29",
-      "typescript": "3.3.3333"
+      "typescript": "3.3.3333",
+      "@types/bcryptjs": "^2.4.2",
+    "@types/express": "^4.17.8",
+    "@types/graphql-fields": "^1.3.3",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/lodash": "^4.14.161",
+    "jest": "^26.4.2"
    },
    "dependencies": {
       "typeorm": "0.2.29",
       "reflect-metadata": "^0.1.10",
       "pg": "^8.4.0",
       "express": "^4.15.4",
-      "body-parser": "^1.18.1"
+      "body-parser": "^1.18.1",
+      "apollo-server-express": "^2.18.1",
+      "bcryptjs": "^2.4.3",
+      "cors": "^2.8.5",
+      "dotenv": "^8.2.0",
+      "graphql": "^15.3.0",
+      "graphql-fields": "^2.0.3",
+      "graphql-iso-date": "^3.6.1",
+      "graphql-middleware": "^4.0.2",
+      "graphql-shield": "^7.3.7",
+      "graphql-tools": "^6.2.4",
+      "jsonwebtoken": "^8.5.1",
+      "lodash": "^4.17.20"
    },
    "scripts": {
-      "start": "ts-node src/index.ts"
-   }
+      "start": "node build/index.js",
+      "dev": "NODE_ENV=development nodemon --exec ts-node src/index.ts",
+      "build": "tsc",
+      "test": "jest --watch",
+      "test-and-exit": "jest --detectOpenHandles --force-exit"
+   },
+   "bugs": {
+      "url": "https://github.com/Bendomey/nodejs-typescript-postgres/issues"
+    },
+    "homepage": "https://github.com/Bendomey/nodejs-typescript-postgres#readme",
+    "author": "Domey Benjamin",
+    "license": "ISC",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/Bendomey/nodejs-typescript-postgres.git"
+    },
+    "keywords": [
+      "server",
+      "typescript",
+      "orm",
+      "postgres",
+      "nodejs"
+    ]
 }
