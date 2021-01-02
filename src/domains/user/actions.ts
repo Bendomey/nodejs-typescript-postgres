@@ -27,7 +27,7 @@ const update = async (body: IUpdateUser) => {
   const __oldUser = await User.findOne(body.id);
   if (!__oldUser) return new Error("UserNotFound");
   await User.update({ id: __oldUser.id }, { ...body });
-  return __oldUser;
+  return true;
 };
 
 const remove = async (body: IRemoveUser) => {
